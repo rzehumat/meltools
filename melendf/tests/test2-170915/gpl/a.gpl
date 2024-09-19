@@ -1,0 +1,88 @@
+set terminal pdf font "Times-Roman,7" dashed enhanced
+set grid
+set xlabel "Time [h]"
+set ylabel "Activity [Bq]"
+set xrange [*:*]
+set yrange [*:*]
+
+set output "a-2-3-01.pdf"
+plot \
+"a-old.txt" using ($1/3600.0):($2) title "Old test KR88" with lines lw 2, \
+"a-new.txt" using ($1/3600.0):($2) title "New test KR88" with lines lw 2 dt 2
+
+set xrange [2.5:6]
+set output "a-2-3-01a.pdf"
+replot
+
+set xrange [*:*]
+set output "a-2-3-02.pdf"
+plot \
+"a-old.txt" using ($1/3600.0):($3) title "Old test RB88" with lines lw 2, \
+"a-new.txt" using ($1/3600.0):($3) title "New test RB88" with lines lw 2 dt 2
+
+set xrange [0:6]
+set output "a-2-3-02a.pdf"
+replot
+
+set xrange [*:*]
+set output "a-2-3-03.pdf"
+plot \
+"a-old.txt" using ($1/3600.0):($4) title "Old test KR93" with lines lw 2, \
+"a-new.txt" using ($1/3600.0):($4) title "New test KR93" with lines lw 2 dt 2
+
+set xrange [0:6]
+set output "a-2-3-03a.pdf"
+replot
+
+set xrange [*:*]
+set output "a-2-3-04.pdf"
+plot \
+"a-old.txt" using ($1/3600.0):($5) title "Old test RB93" with lines lw 2, \
+"a-new.txt" using ($1/3600.0):($5) title "New test RB93" with lines lw 2 dt 2
+
+set xrange [2:6]
+set output "a-2-3-04a.pdf"
+replot
+
+set xrange [*:3.5]
+set output "a-2-3-05.pdf"
+plot \
+"a-old.txt" using ($1/3600.0):($6) title "Old test SR93" with lines lw 2, \
+"a-new.txt" using ($1/3600.0):($6) title "New test SR93" with lines lw 2 dt 2
+
+set xrange [2.2:3.5]
+set output "a-2-3-05a.pdf"
+replot
+
+set xrange [*:*]
+set output "a-2-3-06.pdf"
+plot \
+"a-old.txt" using ($1/3600.0):($7) title "Old test Y93" with lines lw 2, \
+"a-new.txt" using ($1/3600.0):($7) title "New test Y93" with lines lw 2 dt 2
+
+set xrange [2.2:3.5]
+set output "a-2-3-06a.pdf"
+replot
+
+set key bottom right
+set xrange [*:*]
+set output "a-2-3-07.pdf"
+plot \
+"a-old.txt" using ($1/3600.0):($8) title "Old test Zr93" with lines lw 2, \
+"a-new.txt" using ($1/3600.0):($8) title "New test Zr93" with lines lw 2 dt 2
+
+set xrange [*:3.5]
+set output "a-2-3-07a.pdf"
+replot
+
+set key top left
+set xrange [*:*]
+set output "a-2-3-08.pdf"
+plot \
+"a-old.txt" using ($1/3600.0):($9) title "Old test NB93M" with lines lw 2, \
+"a-new.txt" using ($1/3600.0):($9) title "New test NB93M" with lines lw 2 dt 2
+
+set xrange [*:3.5]
+set output "a-2-3-08a.pdf"
+replot
+

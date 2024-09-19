@@ -1,0 +1,36 @@
+set terminal pdf font "Times-Roman,7" dashed enhanced
+set grid
+set xlabel "Time [h]"
+set ylabel "Total power [W]"
+set xrange [*:*]
+set yrange [*:*]
+set output "p-total-01.pdf"
+plot \
+"p-old.txt" using ($1/3600.0):($37) title "Old test" with lines lw 2, \
+"p-new.txt" using ($1/3600.0):($37) title "New test" with lines lw 2 dt 2
+
+set xrange [2.5:6]
+set output "p-total-02.pdf"
+replot
+
+set xrange [*:*]
+set ylabel "Kr element power [W/kg]"
+set output "p-kr-01.pdf"
+plot \
+"p-old.txt" using ($1/3600.0):($2) title "Old test" with lines lw 2, \
+"p-new.txt" using ($1/3600.0):($2) title "New test" with lines lw 2 dt 2
+
+set xrange [2.5:6]
+set output "p-kr-02.pdf"
+replot
+
+set xrange [*:*]
+set ylabel "U element power [W/kg]"
+set output "p-u-01.pdf"
+plot \
+"p-old.txt" using ($1/3600.0):($29) title "Old test" with lines lw 2, \
+"p-new.txt" using ($1/3600.0):($29) title "New test" with lines lw 2 dt 2
+
+set xrange [2.5:6]
+set output "p-u-02.pdf"
+replot
