@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-'''python script browseptf.py 
+'''python script browseptf.py
 Simple GUI for the MELCOR binary output in Linux.
 
-written by Petr Vokac, UJV Rez, a.s 
+written by Petr Vokac, UJV Rez, a.s
 December 2008
 March 2011: added comments
 September 2017: changed structure of modules, created package browseptf
@@ -18,7 +18,7 @@ file can be specified as the first command line argument.
 
 --------------------------------
 
-GUI Usage: 
+GUI Usage:
 
 DblClik or Enter on variable item in the tree adds this variable to
 the chart.
@@ -37,9 +37,9 @@ Buttons:
 
   Min     - minimum of given variable over all the nodes
 
-  Min>0   - minimum of given variable over all nodes with value > 0.0 
-  
-  Sum     - sum of given variable over all the nodes 
+  Min>0   - minimum of given variable over all nodes with value > 0.0
+
+  Sum     - sum of given variable over all the nodes
 
 "1 series" check box - shows just the current variable in the chart
 (on the next redraw)
@@ -66,5 +66,5 @@ see https://pygobject.readthedocs.io/
 
 import browseptf.pvgtkwrap as pvgtkwrap
 if __name__ == "__main__":
- pvgtkwrap.main()
+    pvgtkwrap.main()
 pass
