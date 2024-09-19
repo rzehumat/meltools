@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-'''python script browseptf.py
+"""python script browseptf.py
 Simple GUI for the MELCOR binary output in Linux.
 
 written by Petr Vokac, UJV Rez, a.s
@@ -62,9 +62,10 @@ port info py35-gobject3
 
 see https://pygobject.readthedocs.io/
 
-'''
+"""
 
 import browseptf.pvgtkwrap as pvgtkwrap
+
 if __name__ == "__main__":
     pvgtkwrap.main()
 pass
