@@ -86,7 +86,7 @@ c       sp section is only at the beginning of the melptf ?
         IF (iOpt.EQ.4) THEN
          call sSum()
         ELSE
-         call sOutData()
+         if (fOutData().eq.0) goto 38
         ENDIF
        ENDIF 
        GO TO 24       
@@ -106,6 +106,7 @@ c      BTYPE.EQ.PTYPE read BTYPE again
       READ(NOUP,ERR=33,END=33) BTYPE
       IF (BTYPE.EQ.'KEY ') THEN
        call sReadList(NOUP,NKEYT,NRECT,SVAR,ID,SUNIT,IDD)
+       if (NKEYT+1.gt.mvar) go to 38  
        iKey=iKey+1
        BTYPEO='KEY '
       ENDIF

@@ -11,12 +11,12 @@ FFLAGC=-O2 -cpp
 #FFLAGC=-u -save -w -i-static -check nooutput_conversion -align all -real-size 64 -zero -common-args -O1 -D PRECISION_64 -D ARCH_INT -fpp
 #
 #
-OBJR = globals.o readptfmod.o readptf.o 
+OBJR = globals2.o readptfmod.o readptf.o 
 
-OBJT = globals.o tranptfvar.o tranptfaux.o readptfmod.o tranptfmod.o tranptf.o
+OBJT = globals2.o tranptfvar.o tranptfaux.o readptfmod.o tranptfmod.o tranptf.o
 
-readptf = ~/bin/readptf.exe
-tranptf = ~/bin/tranptf.exe
+readptf = ~/bin/readptf2.exe
+tranptf = ~/bin/tranptf2.exe
 
 all: $(readptf) $(tranptf)
 

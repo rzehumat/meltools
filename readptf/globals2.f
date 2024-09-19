@@ -11,10 +11,14 @@ c     output index of variables, created 29.12.2011
       integer :: nddo
       integer :: iddo(mddo)
 c      
-c     27.12.2019      
-c     variable length of SVAR, though I do not know to find its value
-      integer, parameter :: lsvar=24
-c      integer, parameter :: lsvar=31
+c     12.2.2021 tested on PWR_v2-0.PTF
+c     variable length of SVAR, I do not know to find its value
+c     at run time      
+c     value 28 currently works with:
+c     MELCOR-2.2.18019/testing/gendist_test_cases_2.2.18019/Linux
+c            PWR/PWR_v2-0.PTF
+c            
+      integer, parameter :: lsvar=28
 c     note that dependent files should be recompiled
 c     when module is changed
 c      

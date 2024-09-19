@@ -4,6 +4,8 @@
       contains
 c     16.9.2015
 c     20.2.2017 correction of NRECT, now the the last variable can be an array
+c     13.4.2018 broken pipe error handling
+c     8.1.2019 names processing ignored when index is larger than mvar      
       subroutine fIsSPName(SSP)
       CHARACTER(LEN = *) SSP
       CHARACTER(16) SOUT
@@ -25,6 +27,10 @@ c     20.2.2017 correction of NRECT, now the the last variable can be an array
        read(SSP(ibrl+2:ibrr-1),*) iii
 c         WRITE(*,*) ilen,idash,ibrl,ibrr      
 c         write(*,*) SSP(ibrl+2:ibrr-1)
+       if (iii.gt.mvar) then
+c       ignore too large volume index        
+        return
+       endif
        sCvhVolumeName(iii)=SOUT
        if (iii.gt.nCvhVolumeName) nCvhVolumeName=iii
 c      write(*,*) nCvhVolumeName
@@ -39,6 +45,10 @@ c      write(*,*) nCvhVolumeName
        read(SSP(ibrl+2:ibrr-1),*) iii
 c         WRITE(*,*) ilen,idash,ibrl,ibrr      
 c         write(*,*) SSP(ibrl+2:ibrr-1)
+       if (iii.gt.mvar) then
+c       ignore too large flow path index        
+        return
+       endif       
        sFlPathName(iii)=SOUT
        if (iii.gt.nFlPathName) nFlPathName=iii
        return
@@ -50,13 +60,13 @@ c
       write(*,*) "CVH volume names"
       do i=1,nCvhVolumeName
        il = LEN_TRIM(sCvhVolumeName(i))
-       if (il.gt.0) write(*,*) i,
+       if (il.gt.0 .and. .not. sCvhVolumeName(i)=="") write(*,*) i,
      +  sCvhVolumeName(i),il
       enddo
       write(*,*) "FL path names"      
       do i=1,nFlPathName
        il = LEN_TRIM(sFlPathName(i))
-       if (il.gt.0) write(*,*) i,
+       if (il.gt.0 .and. .not. sFlPathName(i)=="") write(*,*) i,
      +  sFlPathName(i),il
       enddo
       end subroutine fPrintSPNames
@@ -384,17 +394,21 @@ c     local variables
       return
       end subroutine sMaxMin
 
-      subroutine sOutData()
+c     13.4.2018 broken pipe error handling: subroutine -> function       
+      integer function fOutData()
 c     local variables
       integer i
-c     code
-      IF (iOpt.EQ.1) WRITE(*,'(G15.9E2)',ADVANCE='NO') STIME
+      IF (iOpt.EQ.1) WRITE(*,'(G15.9E2)',ADVANCE='NO',ERR=33) STIME
       DO i=1,nddo
-       WRITE(*,'(1X,G15.9E2)',ADVANCE='NO') D(iddo(i))
+       WRITE(*,'(1X,G15.9E2)',ADVANCE='NO',ERR=33) D(iddo(i))
       ENDDO
-      WRITE(*,'("")')
-      return
-      end subroutine sOutData
+      WRITE(*,'("")',ERR=33)
+      fOutData=1
+      return 
+ 33   continue
+      fOutData=0
+      return      
+      end function fOutData
 
       subroutine sOutIndex(SVOUT,RETITL,NKEYT,SVAR,ID,IDD,SUNIT)
 c     arguments
@@ -434,14 +448,14 @@ c       WRITE(*,*) IDD(ID(NKEYT)),ID(NKEYT),NKEYT,NRECT
       subroutine sReadList (NOUP,NKEYT,NRECT,SVAR,ID,SUNIT,IDD)
 c     subroutine arguments
 c       input argument
-      integer NOUP
+      integer :: NOUP
 c       output 
-      integer NKEYT
-      integer NRECT
-      CHARACTER*24 SVAR(*)
-      INTEGER      ID(*)
-      CHARACTER*16 SUNIT(*)
-      INTEGER      IDD(*)
+      integer :: NKEYT
+      integer :: NRECT
+      CHARACTER(LEN = *) :: SVAR(*)
+      INTEGER    ::  ID(*)
+      CHARACTER(LEN = *) :: SUNIT(*)
+      INTEGER :: IDD(*)
 c     auxiliary local variables
       integer i
 c     subroutine code
@@ -450,6 +464,12 @@ c170130  READ(NOUP,ERR=33,END=33) NKEYT
 c170130  on error continue: NRECT may not be present when the plotfile was produced by previous tranptf version
       READ(NOUP,ERR=35,END=33) NKEYT,NRECT
  35   continue
+      if (NKEYT+1.gt.mvar) then
+       write(*,*) "Too many variables", NKEYT 
+       write(*,*) "Increase parameter mvar in globals.f", mvar
+       write(*,*) "and recompile readptf"
+       return
+      endif
       READ(NOUP,ERR=33,END=38) (SVAR(i),i=1,NKEYT)
       READ(NOUP,ERR=33,END=38) (ID(i),i=1,NKEYT)
       READ(NOUP,ERR=33,END=38) (SUNIT(i),i=1,NKEYT)
@@ -471,7 +491,7 @@ c     subroutine input arguments
       integer NKEYT
 c170130 added parameter      
       integer NRECT
-      CHARACTER*24 SVAR(*)
+      CHARACTER(LEN = *) SVAR(*)
       INTEGER      ID(*)
       CHARACTER*16 SUNIT(*)
       INTEGER      IDD(*)
