@@ -1,0 +1,1 @@
+{"pydatatoplevel": 8, "inputs": {"pydata": {"number": 10, "descr": "description of number on pydata"}, "logical_vector": [true, false, true], "integer_scalar": 787, "tf": 1.1, "k": 5, "logical_scalar": true, "float_vector": [1.8, 1e-05, 7.0], "names": ["aaa", "bbb", "ccc"], "t0": 0.1, "x0": 9999.0, "integer_array": [2, 4, 99]}}
