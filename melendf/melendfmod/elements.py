@@ -44,7 +44,7 @@ class elements(object):
             "Se", "Te", "Ru", "Rh", "Pd", "Nb", "Mo", "Tc",
             "Zr", "Ce", "Np", "Pu", "Y", "La", "Pr", "Nd",
             "Pm", "Sm", "Eu", "U", "Ag", "Sn", "As", "Sb",
-            "Cd", "Am", "Cm",
+            "Cd", "Am", "Cm"
         ]
         # isotopes to move, the first guess from ori2003 and update for endf.py in 2012
         self.lmove = [
