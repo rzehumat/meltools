@@ -1,10 +1,10 @@
       module tranptfvar
       implicit none
-c     maximum number of variable names
+!     maximum number of variable names
       integer, parameter :: mvaro=10000
-c     maximum number of indexes
+!     maximum number of indexes
       integer, parameter :: mdo=500000
-c     list of variables
+!     list of variables
       integer nvarreq            
       CHARACTER*24 SVARREQ(mvaro) 
       integer nvarout            
@@ -17,7 +17,7 @@ c     list of variables
       contains
 
       subroutine sFiltVars(NKEYT,SVAR,ID,SUNIT,IDD,ivo,nid)
-c      needs scalar as the last variable, no longer needed but let it be for now 21.2.2017  
+!      needs scalar as the last variable, no longer needed but let it be for now 21.2.2017  
       integer NKEYT
       CHARACTER*24 SVAR(*)
       INTEGER      ID(*)
@@ -57,15 +57,15 @@ c      needs scalar as the last variable, no longer needed but let it be for now
      +    SVARREQ(ivreq)(1:iii)
        end if
       end do
-c 11.4.2018 allow to create melptf with vector last variable      
-c      if (iFound.gt.1) then
-c       iii=LEN_TRIM(SVARREQ(nvarreq))
-c       write (*,'("The last requested variable should be scalar!")')
-c       write (*,'("Variable: ", A, " would not be accesible!")') 
-c     +    SVARREQ(nvarreq)(1:iii)
-c       write (*,'("Transformation canceled")')
-c       stop
-c      end if
+! 11.4.2018 allow to create melptf with vector last variable      
+!      if (iFound.gt.1) then
+!       iii=LEN_TRIM(SVARREQ(nvarreq))
+!       write (*,'("The last requested variable should be scalar!")')
+!       write (*,'("Variable: ", A, " would not be accesible!")') 
+!     +    SVARREQ(nvarreq)(1:iii)
+!       write (*,'("Transformation canceled")')
+!       stop
+!      end if
       end subroutine sFiltVars
 
       subroutine sReadVar(svarfile)

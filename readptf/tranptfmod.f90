@@ -1,11 +1,11 @@
       module tranptfmod
       implicit none
-c global variables from the input configuration file 
-c      11.4.2012 stitle should be the same size as RETITL      
-c      2.8.2012 increase dimension of smelptfi to 250
-c      25.8.2014 dtmin to allow filter out records from BURN
-c                modified input check
-c                some comments
+! global variables from the input configuration file 
+!      11.4.2012 stitle should be the same size as RETITL      
+!      2.8.2012 increase dimension of smelptfi to 250
+!      25.8.2014 dtmin to allow filter out records from BURN
+!                modified input check
+!                some comments
       character*110 stitle 
       integer, parameter :: mptf=20 
       character*250 smelptfi(mptf)
@@ -19,7 +19,7 @@ c                some comments
       contains
       
       subroutine inputread(sinput)
-c reads input parameters from the configuration file 
+! reads input parameters from the configuration file 
       namelist /input/ stitle,smelptfi,svarlist,smelptfo,inrpd,
      + sstarttime,sendtime,ievery,sdtmin
       integer i,IUNIT
@@ -43,7 +43,7 @@ c reads input parameters from the configuration file
       end subroutine inputread
 
       subroutine inputout()
-c check input parameters
+! check input parameters
       integer i,j
       write(*,"('------------ Input check ------------------------')") 
       write(*,"('Title: ', A)") stitle
@@ -64,16 +64,16 @@ c check input parameters
       end subroutine inputout
 
       subroutine transfile(iinp,iuout)
-c do the transformation for all the input files
+! do the transformation for all the input files
       use globals
       use readptfmod, only: sReadList, sWriteList
       use tranptfvar
       integer iinp,iuout,ir,iev
-c      integer ivreq,ivo,ivi,idlast
-c      integer idolast,ii,iii,nid
+!      integer ivreq,ivo,ivi,idlast
+!      integer idolast,ii,iii,nid
       integer ivo,nid
       integer ior ! 12.5.2017: ior==1 write output record, ior==-1 skip rest of the input file     
-c     initialize variables
+!     initialize variables
       call initglobals()
       nid=0
       ir=0
@@ -83,7 +83,7 @@ c     initialize variables
       OPEN(IUNIT,FILE=FNAME,STATUS=FSTAT,FORM=FFORM,ERR=901,
      +       IOSTAT=IOS,ACTION='READ')
       NOUP=IUNIT
-c      main cycle - label 24
+!      main cycle - label 24
  24   CONTINUE
       READ(NOUP,ERR=33,END=38) BTYPE
       IF(BTYPE.EQ.'.TR/') THEN
@@ -131,17 +131,17 @@ c      main cycle - label 24
       IF (BTYPE.EQ.'KEY ') THEN
        call sReadList (NOUP,NKEYT,NRECT,SVAR,ID,SUNIT,IDD)
        if (svarlist.eq."") then 
-c     170130        call sWriteList (iuout,NKEYT,SVAR,ID,SUNIT,IDD)
+!     170130        call sWriteList (iuout,NKEYT,SVAR,ID,SUNIT,IDD)
         call sWriteList(iuout,NKEYT,NRECT,SVAR,ID,SUNIT,IDD)
        else
         call sFiltVars(NKEYT,SVAR,ID,SUNIT,IDD,ivo,nid)
-c     170130        call sWriteList (iuout,ivo,SVAROUT,IDOUT,SUNITOUT,IDDOUT)
+!     170130        call sWriteList (iuout,ivo,SVAROUT,IDOUT,SUNITOUT,IDDOUT)
         call sWriteList(iuout,ivo,nid,SVAROUT,IDOUT,SUNITOUT,IDDOUT)
        end if 
       ENDIF
       IF(BTYPE.EQ.'TITL') THEN
        READ(NOUP,ERR=33,END=38) RETITL
-c       11.4.2012 
+!       11.4.2012 
        if (stitle.ne."") RETITL=stitle
        write(iuout,ERR=34) RETITL
       ENDIF
@@ -161,8 +161,8 @@ c       11.4.2012
       end subroutine transfile
 
       integer function fOutRec(i,x)
-c      checks whether to output current record or not
-c      real data from melptf
+!      checks whether to output current record or not
+!      real data from melptf
       INTEGER, PARAMETER   :: KIND_PLOT=SELECTED_REAL_KIND(6)
       integer :: i,ifirst
       REAL(KIND=KIND_PLOT) :: x
@@ -173,7 +173,7 @@ c      real data from melptf
       iRet = 1
       if (sstarttime(i).ne."") then 
        read(sstarttime(i),*) xt
-c       write(*,*) xt,x
+!       write(*,*) xt,x
        if (xt.gt.x) iRet = 0
       end if 
       if (sendtime(i).ne."") then 
@@ -186,24 +186,24 @@ c       write(*,*) xt,x
       else
        if (x.lt.xp) then
         iRet=0
-c debug print         write (*,*) "record refused:",x,xp
+! debug print         write (*,*) "record refused:",x,xp
        else 
-c 25.8.2014 check dtmin        
+! 25.8.2014 check dtmin        
         if (sdtmin(i).ne."") then
          read(sdtmin(i),*) dtmin
          if ((x-xp).lt.dtmin) iRet=0
         end if
        end if
       end if
-c 2.4.2012 if the record is not for output, keep the previous last time
-c 25.8.2014 put this at the end 
+! 2.4.2012 if the record is not for output, keep the previous last time
+! 25.8.2014 put this at the end 
       if (iRet.eq.1) xp=x
       fOutRec=iRet
       return
       end function fOutRec
 
       subroutine transfallfiles()
-c do the transformation for all the input files
+! do the transformation for all the input files
       integer i,iuout
       iuout=0
       OPEN(iuout,FILE=smelptfo,STATUS='NEW',

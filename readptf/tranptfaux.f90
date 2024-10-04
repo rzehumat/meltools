@@ -2,7 +2,7 @@
       implicit none
       contains
       integer function fGetArgs(sinput)
-c get configuration file name from the command line
+! get configuration file name from the command line
       use readptfmod, only: sinfo
       character*250 sinput
       integer i

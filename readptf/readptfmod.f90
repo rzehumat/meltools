@@ -2,10 +2,10 @@
       use globals
       implicit none
       contains
-c     16.9.2015
-c     20.2.2017 correction of NRECT, now the the last variable can be an array
-c     13.4.2018 broken pipe error handling
-c     8.1.2019 names processing ignored when index is larger than mvar      
+!     16.9.2015
+!     20.2.2017 correction of NRECT, now the the last variable can be an array
+!     13.4.2018 broken pipe error handling
+!     8.1.2019 names processing ignored when index is larger than mvar      
       subroutine fIsSPName(SSP)
       CHARACTER(LEN = *) SSP
       CHARACTER(16) SOUT
@@ -25,15 +25,15 @@ c     8.1.2019 names processing ignored when index is larger than mvar
      +     (ibrr.gt.0)) then
        SOUT=SSP(ibrr+2:ilen)
        read(SSP(ibrl+2:ibrr-1),*) iii
-c         WRITE(*,*) ilen,idash,ibrl,ibrr      
-c         write(*,*) SSP(ibrl+2:ibrr-1)
+!         WRITE(*,*) ilen,idash,ibrl,ibrr      
+!         write(*,*) SSP(ibrl+2:ibrr-1)
        if (iii.gt.mvar) then
-c       ignore too large volume index        
+!       ignore too large volume index        
         return
        endif
        sCvhVolumeName(iii)=SOUT
        if (iii.gt.nCvhVolumeName) nCvhVolumeName=iii
-c      write(*,*) nCvhVolumeName
+!      write(*,*) nCvhVolumeName
        return
       endif
       idash = INDEX(SSP,'FL-PATH-NAME')      
@@ -43,10 +43,10 @@ c      write(*,*) nCvhVolumeName
      +     (ibrr.gt.0)) then
        SOUT=SSP(ibrr+2:ilen)
        read(SSP(ibrl+2:ibrr-1),*) iii
-c         WRITE(*,*) ilen,idash,ibrl,ibrr      
-c         write(*,*) SSP(ibrl+2:ibrr-1)
+!         WRITE(*,*) ilen,idash,ibrl,ibrr      
+!         write(*,*) SSP(ibrl+2:ibrr-1)
        if (iii.gt.mvar) then
-c       ignore too large flow path index        
+!       ignore too large flow path index        
         return
        endif       
        sFlPathName(iii)=SOUT
@@ -54,7 +54,7 @@ c       ignore too large flow path index
        return
       endif
       end subroutine fIsSPName
-c
+!
       subroutine fPrintSPNames()
       integer i,il
       write(*,*) "CVH volume names"
@@ -70,13 +70,13 @@ c
      +  sFlPathName(i),il
       enddo
       end subroutine fPrintSPNames
-c
+!
       integer function fGetCVHId(sname)
       CHARACTER(LEN = *) sname
       integer i
-c      write(*,*) nCvhVolumeName
+!      write(*,*) nCvhVolumeName
       do i=1,nCvhVolumeName
-c       write(*,*) sname,sCvhVolumeName(i)    
+!       write(*,*) sname,sCvhVolumeName(i)    
        if (sCvhVolumeName(i).eq.sname) then
         fGetCVHId=i
         return
@@ -85,7 +85,7 @@ c       write(*,*) sname,sCvhVolumeName(i)
       fGetCVHId=0
       return
       end function fGetCVHId
-c
+!
       integer function fGetFLId(sname)
       CHARACTER(LEN = *) sname
       integer i
@@ -98,12 +98,12 @@ c
       fGetFLId=0
       return
       end function fGetFLId
-c     
+!     
       integer function fGetArgs()
-C     auxiliary variables
+!     auxiliary variables
       CHARACTER*24 SAUX 
       integer i,j,k,iRet
-C     function code
+!     function code
       i=IARGC()
       IF (i.LT.2) GOTO 10
       CALL GETARG(1,FNAME)
@@ -131,22 +131,22 @@ C     function code
       end function fGetArgs
 
       integer function fGetSVOUTidl(SVOUT)
-c     input arguments
+!     input arguments
       CHARACTER(LEN = *) SVOUT
-c     local variables
+!     local variables
       integer i,j,iL,iLS,iK
       CHARACTER*24 SAUX
       integer iFound
-c     code
+!     code
       iLS=LEN_TRIM(SVOUT)
-c     loop over all variable names to find exact match
+!     loop over all variable names to find exact match
       iFound=0
       DO i=1,NKEYT
        iL=LEN_TRIM(SVAR(i))
        if (iLS.EQ.iL) then 
         if (SVOUT(1:iL).EQ.SVAR(i)(1:iL)) then
          do j=ID(i),ID(i+1)-1
-c          WRITE (*,*) j,nddo
+!          WRITE (*,*) j,nddo
           nddo=nddo+1
           iddo(nddo)=j
           iFound=iFound+1
@@ -159,22 +159,22 @@ c          WRITE (*,*) j,nddo
       end function fGetSVOUTidl
 
       integer function fGetSVOUTide(SVOUT)
-c     input arguments
+!     input arguments
       CHARACTER(LEN = *) SVOUT
-c     local variables
+!     local variables
       integer i,j,iL,iLS,iK
       CHARACTER*24 SAUX
       integer iFound
-c     code
+!     code
       iLS=LEN_TRIM(SVOUT)
-c     loop over all variable names to find match with
-c     after dot spec
+!     loop over all variable names to find match with
+!     after dot spec
       iFound=0
       DO i=1,NKEYT
        iK=0
        iL=LEN_TRIM(SVAR(i))
        IF (iL+1.LT.iLS) THEN
-c       variable name is shorter than input keyword
+!       variable name is shorter than input keyword
         IF (SVOUT(iL+1:iL+1).EQ.".") THEN
          WRITE(SAUX,*) '(I',iLS+2-iL,')'
          READ(SVOUT(iL+2:iLS),ERR=1000,FMT=SAUX) iK
@@ -188,11 +188,11 @@ c       variable name is shorter than input keyword
           endif
          endif
         ENDIF
-c        WRITE (*,*) SVOUT(1:iL),SVAR(i)(1:iL)
+!        WRITE (*,*) SVOUT(1:iL),SVAR(i)(1:iL)
         IF (SVOUT(1:iL).EQ.SVAR(i)(1:iL)) then
          IF (iK.GT.0) THEN
           DO j=ID(i),ID(i+1)-1
-C           WRITE (*,*) IDD(j),iK
+!           WRITE (*,*) IDD(j),iK
            IF (IDD(j).EQ.iK) THEN
             iddo(nddo+1)=j
             nddo=nddo+1
@@ -209,7 +209,7 @@ C           WRITE (*,*) IDD(j),iK
 
       subroutine sinfo(sexe)
       character*7 sexe
-c
+!
       WRITE (*,*) '--------------------------------------------'
       WRITE (*,'("This is ",A)') sexe 
 #ifdef __DATE__
@@ -249,7 +249,7 @@ c
       end subroutine sinfo
 
       subroutine helpout()
-c     readptf short info
+!     readptf short info
       WRITE (*,*) '--------------------------------------------'
       WRITE (*,*) 'Two obligatory command line arguments:      '
       WRITE (*,*) '1: plot file filename                       '
@@ -321,17 +321,17 @@ c     readptf short info
       end subroutine scheck2
 
       subroutine sGetSVOUTid()
-c     local variables
+!     local variables
       integer i,j,iL1,iL2,iLT,iLS,iK
       integer iL(LEN(SVOUT))
       integer iFound      
-c      CHARACTER*24 SAUX
-c      CHARACTER*24 SVOUT1
+!      CHARACTER*24 SAUX
+!      CHARACTER*24 SVOUT1
       CHARACTER*100 SAUX
       CHARACTER*100 SVOUT1      
-c     code
+!     code
       iLT=LEN_TRIM(SVOUT)
-c      write(*,*) iLT,LEN(SVOUT) 
+!      write(*,*) iLT,LEN(SVOUT) 
       j=0
       do i=1,iLT
        if ((SVOUT(i:i).eq."#").or.(SVOUT(i:i).eq." ")) then
@@ -343,12 +343,12 @@ c      write(*,*) iLT,LEN(SVOUT)
        j=j+1
        iL(j)=iLT+1
       end if
-c      write(*,*) iL
+!      write(*,*) iL
       iL1=1
       do i=1,j
        iL2=iL(i)-1
        SVOUT1=SVOUT(iL1:iL2)
-c       write(*,*) SVOUT1,SVOUT(iL1:iL2),iL1,iL2
+!       write(*,*) SVOUT1,SVOUT(iL1:iL2),iL1,iL2
        iFound=0
        iLS=LEN_TRIM(SVOUT1)
        if (SVOUT1(iLS:iLS).eq.".") then
@@ -369,7 +369,7 @@ c       write(*,*) SVOUT1,SVOUT(iL1:iL2),iL1,iL2
       end subroutine sGetSVOUTid
 
       subroutine sMaxMin()
-c     local variables        
+!     local variables        
       REAL*8 dMax,dMin
       integer iMax,iMin,i
       dMax=-1.0D+39
@@ -394,9 +394,9 @@ c     local variables
       return
       end subroutine sMaxMin
 
-c     13.4.2018 broken pipe error handling: subroutine -> function       
+!     13.4.2018 broken pipe error handling: subroutine -> function       
       integer function fOutData()
-c     local variables
+!     local variables
       integer i
       IF (iOpt.EQ.1) WRITE(*,'(G15.9E2)',ADVANCE='NO',ERR=33) STIME
       DO i=1,nddo
@@ -411,7 +411,7 @@ c     local variables
       end function fOutData
 
       subroutine sOutIndex(SVOUT,RETITL,NKEYT,SVAR,ID,IDD,SUNIT)
-c     arguments
+!     arguments
       CHARACTER(LEN = *) SVOUT
       CHARACTER(LEN = *) RETITL
       integer NKEYT
@@ -419,10 +419,10 @@ c     arguments
       INTEGER      ID(*)
       INTEGER      IDD(*)
       CHARACTER(LEN = *) SUNIT(*)       
-c     local variables
+!     local variables
       integer i,ii,j,k,l
       integer, parameter :: m = 10
-c     code
+!     code
       IF (SVOUT.EQ.'list') then
        WRITE(*,*) TRIM(RETITL)
        DO i=1,NKEYT
@@ -439,29 +439,29 @@ c     code
         enddo
         WRITE(*,*) "*"
        ENDDO
-c       WRITE(*,*) (IDD(j),j=i,ID(NKEYT))
-c       WRITE(*,*) IDD(ID(NKEYT)),ID(NKEYT),NKEYT,NRECT
+!       WRITE(*,*) (IDD(j),j=i,ID(NKEYT))
+!       WRITE(*,*) IDD(ID(NKEYT)),ID(NKEYT),NKEYT,NRECT
       end if
       return 
       end subroutine sOutIndex
 
       subroutine sReadList (NOUP,NKEYT,NRECT,SVAR,ID,SUNIT,IDD)
-c     subroutine arguments
-c       input argument
+!     subroutine arguments
+!       input argument
       integer :: NOUP
-c       output 
+!       output 
       integer :: NKEYT
       integer :: NRECT
       CHARACTER(LEN = *) :: SVAR(*)
       INTEGER    ::  ID(*)
       CHARACTER(LEN = *) :: SUNIT(*)
       INTEGER :: IDD(*)
-c     auxiliary local variables
+!     auxiliary local variables
       integer i
-c     subroutine code
+!     subroutine code
       NRECT=-1
-c170130  READ(NOUP,ERR=33,END=33) NKEYT
-c170130  on error continue: NRECT may not be present when the plotfile was produced by previous tranptf version
+!170130  READ(NOUP,ERR=33,END=33) NKEYT
+!170130  on error continue: NRECT may not be present when the plotfile was produced by previous tranptf version
       READ(NOUP,ERR=35,END=33) NKEYT,NRECT
  35   continue
       if (NKEYT+1.gt.mvar) then
@@ -477,40 +477,40 @@ c170130  on error continue: NRECT may not be present when the plotfile was produ
        NRECT=ID(NKEYT)
       end if
       READ(NOUP,ERR=33,END=38) (IDD(i),i=1,NRECT)
-c      add value to ID(NKEYT+1) to simplify later loops               
+!      add value to ID(NKEYT+1) to simplify later loops               
       ID(NKEYT+1)=NRECT+1      
  33   continue
  38   continue
       return
       end subroutine sReadList
 
-c170130      subroutine sWriteList(NOUP,NKEYT,SVAR,ID,SUNIT,IDD)
+!170130      subroutine sWriteList(NOUP,NKEYT,SVAR,ID,SUNIT,IDD)
       subroutine sWriteList(NOUP,NKEYT,NRECT,SVAR,ID,SUNIT,IDD)      
-c     subroutine input arguments
+!     subroutine input arguments
       integer NOUP
       integer NKEYT
-c170130 added parameter      
+!170130 added parameter      
       integer NRECT
       CHARACTER(LEN = *) SVAR(*)
       INTEGER      ID(*)
       CHARACTER*16 SUNIT(*)
       INTEGER      IDD(*)
-c     auxiliary local variables
+!     auxiliary local variables
       integer i
-c     subroutine code
-c170130     write(NOUP,ERR=33) NKEYT
+!     subroutine code
+!170130     write(NOUP,ERR=33) NKEYT
       write(NOUP,ERR=33) NKEYT,NRECT       
       write(NOUP,ERR=33) (SVAR(i),i=1,NKEYT)
       write(NOUP,ERR=33) (ID(i),i=1,NKEYT)
       write(NOUP,ERR=33) (SUNIT(i),i=1,NKEYT)
-C170221      write(NOUP,ERR=33) (IDD(i),i=1,ID(NKEYT))
+!170221      write(NOUP,ERR=33) (IDD(i),i=1,ID(NKEYT))
       write(NOUP,ERR=33) (IDD(i),i=1,NRECT)
  33   continue
       return 
       end subroutine sWriteList
 
       subroutine sSum()
-c     local variables        
+!     local variables        
       REAL*8 dSum
       integer i
       dSum=0.0
