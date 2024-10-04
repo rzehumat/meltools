@@ -1,55 +1,55 @@
-c     8.1.2019 mvar increased to 100000
+!     8.1.2019 mvar increased to 100000
       module globals
       implicit none
-c     maximum dimension of the output vector
+!     maximum dimension of the output vector
       integer, parameter :: mddo=100000
-c     maximum number of variable names
+!     maximum number of variable names
       integer, parameter :: mvar=100000
-c     maximum dimension of the input vector 
+!     maximum dimension of the input vector 
       integer, parameter :: md=500000
-c     output index of variables, created 29.12.2011
+!     output index of variables, created 29.12.2011
       integer :: nddo
       integer :: iddo(mddo)
-c      
-c     12.2.2021 tested on PWR_v2-0.PTF
-c     variable length of SVAR, I do not know to find its value
-c     at run time      
-c     value 28 currently works with:
-c     MELCOR-2.2.18019/testing/gendist_test_cases_2.2.18019/Linux
-c            PWR/PWR_v2-0.PTF
-c            
+!      
+!     12.2.2021 tested on PWR_v2-0.PTF
+!     variable length of SVAR, I do not know to find its value
+!     at run time      
+!     value 28 currently works with:
+!     MELCOR-2.2.18019/testing/gendist_test_cases_2.2.18019/Linux
+!            PWR/PWR_v2-0.PTF
+!            
       integer, parameter :: lsvar=28
-c     note that dependent files should be recompiled
-c     when module is changed
-c      
-c     input file (melptf) handling      
+!     note that dependent files should be recompiled
+!     when module is changed
+!      
+!     input file (melptf) handling      
       INTEGER IUNIT,IOS,NOUP
       CHARACTER*250 FNAME
       CHARACTER*50 FSTAT,FFORM
       integer NKEYT,NRECT,NCYCLE 
-c      list of variables
+!      list of variables
       CHARACTER(LEN=lsvar) :: SVAR(mvar)
       INTEGER      ID(mvar)
       CHARACTER(LEN=16) :: SUNIT(mvar)
-c      simulation title
+!      simulation title
       CHARACTER*110 RETITL
-c      data type selectors in melptf
+!      data type selectors in melptf
       CHARACTER*4 BTYPE,PTYPE,BTYPEO
       DATA PTYPE/'./*/'/
-c      real data from melptf
+!      real data from melptf
       INTEGER, PARAMETER   :: KIND_PLOT=SELECTED_REAL_KIND(6)
       REAL(KIND=KIND_PLOT) :: STIME,SDT,SCPU
       REAL(KIND=KIND_PLOT) :: D(md)
-c      definition of the output vector D(IDD(i))
+!      definition of the output vector D(IDD(i))
       INTEGER      IDD(md)
-c      auxiliary variables      
+!      auxiliary variables      
       integer i
       CHARACTER*10000 SVOUT ! 15.5.2012 increased to accomodate large number of variables
       CHARACTER*72 SAUXA
       INTEGER iOpt
-c      melptf accounting variables
+!      melptf accounting variables
       integer iTitl,iKey,iTR,iSP
-c      object names, added 16.9.2015    
+!      object names, added 16.9.2015    
       CHARACTER*16 sCvhVolumeName(mvar) 
       integer nCvhVolumeName
       CHARACTER*16 sFlPathName(mvar) 
