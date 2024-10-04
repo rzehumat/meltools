@@ -47,8 +47,7 @@
 !     read command line arguments
       if (fGetArgs().eq.0) GOTO 900
 !      open melptf      
-      OPEN(IUNIT,FILE=FNAME,STATUS=FSTAT,FORM=FFORM,ERR=901,
-     +       IOSTAT=IOS,ACTION='READ')
+      OPEN(IUNIT,FILE=FNAME,STATUS=FSTAT,FORM=FFORM,ERR=901,IOSTAT=IOS,ACTION='READ')
       NOUP=IUNIT
 !      main cycle - label 24
  24   CONTINUE
@@ -62,8 +61,7 @@
          write(*,*) (iddo(I),I=1,nddo)
          write(*,*) "*"
         endif
-        IF (SVOUT.EQ.'check') 
-     +      call scheck1(STIME,NCYCLE,NRECT,NKEYT)
+        IF (SVOUT.EQ.'check') call scheck1(STIME,NCYCLE,NRECT,NKEYT)
        endif
        IF ((SVOUT.EQ.'list').OR.(SVOUT.EQ.'index')) THEN 
         call sOutIndex(SVOUT,RETITL,NKEYT,SVAR,ID,IDD,SUNIT)
