@@ -53,8 +53,7 @@
        end do
        if (iFound.eq.0) then
         iii=LEN_TRIM(SVARREQ(ivreq))
-        write (*,'("Requested variable: ", A ," not found!")') 
-     +    SVARREQ(ivreq)(1:iii)
+        write (*,'("Requested variable: ", A ," not found!")') SVARREQ(ivreq)(1:iii)
        end if
       end do
 ! 11.4.2018 allow to create melptf with vector last variable      
