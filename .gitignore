@@ -2,4 +2,6 @@
 *.mod
 *.o
 readptf/readptf
+readptf/readptf2
 readptf/tranptf
+readptf/tranptf2
