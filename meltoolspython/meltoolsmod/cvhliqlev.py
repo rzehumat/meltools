@@ -100,16 +100,8 @@ def fMain():
         pass
 
         pvpyx.fPlotFLSimple(
-            c,
-            lfl,
-            lscv,
-            co.x00,
-            co.xra,
-            lx0,
-            lflfrom,
-            lflto,
-            lflfromz,
-            lfltoz,
+            c, lfl, lscv, co.x00, co.xra, lx0, lflfrom, lflto,
+            lflfromz, lfltoz,
             flcol=pyx.deco.color.rgb.blue,
         )
 

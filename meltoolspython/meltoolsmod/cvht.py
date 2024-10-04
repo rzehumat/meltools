@@ -88,15 +88,8 @@ def fMain():
         tmin = min([290] + lflat + lzzl[iRec] + lzzv[iRec])
         # print (tmin,tmax)
         pvpyx.fPlotScale(
-            c,
-            mcgr,
-            co.x0tscale,
-            zmin1,
-            co.x0tscale + co.dxtscale,
-            zmax1,
-            tmax,
-            tmin,
-            co.lttics,
+            c, mcgr, co.x0tscale, zmin1, co.x0tscale + co.dxtscale,
+            zmax1, tmax, tmin, co.lttics
         )
         # pvpyx.fPlotCVHOneColor(c,mcgr,co.x00,lscv,lx0,lscvt,lscvz,lscvv,lscvx,lzz,tmax,tmin)
         # pvpyx.fPlotFLSimple(c,lfl,lscv,co.x00,co.xra,lx0,lflfrom,lflto,lflfromz,lfltoz)
@@ -105,18 +98,8 @@ def fMain():
             # rint(tmax, tmin, iRec)
             # rint(lHSlal)
             pvpyx.fPlotHSTemp(
-                c,
-                mcgr,
-                co.x00,
-                lhs,
-                lhsx0,
-                llhsx,
-                lhst[iRec],
-                lHSNumber,
-                lHSba,
-                lHSlal,
-                tmax,
-                tmin,
+                c, mcgr, co.x00, lhs, lhsx0, llhsx, lhst[iRec],
+                lHSNumber, lHSba, lHSlal, tmax, tmin
             )
         pass
         sf = "./%s/%04d" % (co.spdfdir, iRec)

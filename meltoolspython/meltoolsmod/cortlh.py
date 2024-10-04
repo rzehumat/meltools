@@ -48,15 +48,8 @@ def fMain():
     print("Elevations: ", lz)
 
     for svar in [
-        "xRVESS",
-        "xRVLH",
-        "dzlh2",
-        "dzlh1",
-        "dzrv2",
-        "dzrv1",
-        "nlh2",
-        "nlh1",
-        "ntlp",
+        "xRVESS", "xRVLH", "dzlh2", "dzlh1", "dzrv2",
+        "dzrv1", "nlh2", "nlh1", "ntlp"
     ]:
         if getattr(co, svar) is None:
             print("Variable %s not specified in the configuration file" % (svar))
@@ -87,15 +80,8 @@ def fMain():
         co.xRVESS = pickle.load(f)  # core_data.rvess # reactor vessel inner radius
         f.close()
         print(
-            co.xRVESS,
-            co.xRVLH,
-            co.nlh2,
-            co.nlh1,
-            co.dzlh2,
-            co.dzlh1,
-            co.dzrv2,
-            co.dzrv1,
-            co.ntlp,
+            co.xRVESS, co.xRVLH, co.nlh2, co.nlh1, co.dzlh2,
+            co.dzlh1, co.dzrv2, co.dzrv1, co.ntlp
         )
     pass
     nrad = len(lr)
@@ -169,32 +155,9 @@ def fMain():
 
         # colors in the wall
         cortlhmod.fColorWall(
-            c,
-            mcgr,
-            x0,
-            y0,
-            tanfi1,
-            tanfi2,
-            co.xRVESS,
-            xDZRV,
-            co.xRVLH,
-            xDZLH,
-            xHLST,
-            co.nlh1,
-            co.nlh2,
-            lr,
-            lz,
-            xfii,
-            xfio,
-            yi,
-            yo,
-            co.dzlh1,
-            co.dzlh2,
-            co.dzrv1,
-            co.dzrv2,
-            ltime,
-            l,
-            it,
+            c, mcgr, x0, y0, tanfi1, tanfi2, co.xRVESS, xDZRV, co.xRVLH,
+            xDZLH, xHLST, co.nlh1, co.nlh2, lr, lz, xfii, xfio, yi, yo,
+            co.dzlh1, co.dzlh2, co.dzrv1, co.dzrv2, ltime, l, it
         )
 
         # following is not dependent on the time
@@ -203,22 +166,9 @@ def fMain():
 
         # plot nodalization of the RPV wall
         cortlhmod.fWallGrid(
-            c,
-            lr,
-            lz,
-            co.xRVESS,
-            co.xRVLH,
-            xHLST,
-            x0,
-            y0,
-            co.dzlh1,
-            co.dzlh2,
-            co.dzrv1,
-            co.dzrv2,
-            co.nlh1,
-            co.nlh2,
-            tanfi1,
-            tanfi2,
+            c, lr, lz, co.xRVESS, co.xRVLH, xHLST, x0, y0,
+            co.dzlh1, co.dzlh2, co.dzrv1, co.dzrv2, co.nlh1, co.nlh2,
+            tanfi1, tanfi2,
         )
 
         # plot titles

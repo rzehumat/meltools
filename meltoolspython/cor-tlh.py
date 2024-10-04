@@ -5,7 +5,7 @@
  written by Petr Vokac, ÚJV Řež, a.s
  August 2009, July 2010, March 2011
  September 2015, compatibility with Python3
- August 2017, change of model organization 
+ August 2017, change of model organization
  License: as-is
 
  expects "readptf.exe" on PATH !
