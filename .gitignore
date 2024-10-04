@@ -1,7 +1,7 @@
 # fortran compiled files
 *.mod
 *.o
-readptf/readptf
-readptf/readptf2
-readptf/tranptf
-readptf/tranptf2
+readptf/readptf.exe
+readptf/readptf2.exe
+readptf/tranptf.exe
+readptf/tranptf2.exe

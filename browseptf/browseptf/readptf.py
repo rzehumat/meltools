@@ -111,7 +111,7 @@ def fReadVarKey(sptf="MELPTF"):
     """reads list of variables from MELPTF"""
     bVarNext = True
     p = subp.Popen(
-        ["readptf", sptf, "index"],
+        ["readptf.exe", sptf, "index"],
         stdin=subp.PIPE,
         stdout=subp.PIPE,
         stderr=subp.STDOUT,
@@ -209,7 +209,7 @@ def fSP(sptf="MELPTF"):
     sRN1CLASSNAME = "RN1-CLASS-NAME(("
     lHSi = []  # number of hs nodes, temporary list local to fSP
     p = subp.Popen(
-        ["readptf", sptf, "sp"],
+        ["readptf.exe", sptf, "sp"],
         stdin=subp.PIPE,
         stdout=subp.PIPE,
         stderr=subp.STDOUT,
@@ -368,7 +368,7 @@ pass
 def fTitle(sptf="MELPTF"):
     """get sequence title from the binary file"""
     p = subp.Popen(
-        ["readptf", sptf, "list"],
+        ["readptf.exe", sptf, "list"],
         stdin=subp.PIPE,
         stdout=subp.PIPE,
         stderr=subp.STDOUT,
@@ -430,7 +430,7 @@ def fFormatVar(lVar, sptf="MELPTF"):
         pass
         if iOK >= 0:
             pltstr1 = (
-                '"< readptf %s %s%s%s " using (fT($1)):2 title "%s" with lines'
+                '"< readptf.exe %s %s%s%s " using (fT($1)):2 title "%s" with lines'
                 % (sptf, sap, sVar, sap, sVar)
             )
         else:
@@ -450,18 +450,18 @@ def fFormatVar(lVar, sptf="MELPTF"):
             if iOK >= 0:
                 if len(sVarv) > 3:
                     pltstr1 = (
-                        '"< readptf %s %s%s%s " using (fT($1)):%d title "%s %s %s" with lines'
+                        '"< readptf.exe %s %s%s%s " using (fT($1)):%d title "%s %s %s" with lines'
                         % (sptf, sap, sss, sdap, iv + 1, sss, sVarv[1], sVarv[3])
                     )
                 else:
                     if len(sVarv) > 1:
                         pltstr1 = (
-                            '"< readptf %s %s%s%s " using (fT($1)):%d title "%s %s" with lines'
+                            '"< readptf.exe %s %s%s%s " using (fT($1)):%d title "%s %s" with lines'
                             % (sptf, sap, sss, sdap, iv + 1, sss, sVarv[1])
                         )
                     else:
                         pltstr1 = (
-                            '"< readptf %s %s%s%s " using (fT($1)):%d title "%s#%d" with lines'
+                            '"< readptf.exe %s %s%s%s " using (fT($1)):%d title "%s#%d" with lines'
                             % (sptf, sap, sss, sdap, iv + 1, sss, iv)
                         )
                     pass
@@ -474,7 +474,7 @@ def fFormatVar(lVar, sptf="MELPTF"):
                 pass
                 if bOK:
                     pltstr1 = (
-                        '"< readptf %s %s%s%s 2 " using (fT($1)):2 title "MAX %s" with lines'
+                        '"< readptf.exe %s %s%s%s 2 " using (fT($1)):2 title "MAX %s" with lines'
                         % (sptf, sap, sss, sdap, sss)
                     )
                     iOK = 1
@@ -486,7 +486,7 @@ def fFormatVar(lVar, sptf="MELPTF"):
                     pass
                     if bOK:
                         pltstr1 = (
-                            '"< readptf %s %s%s%s 2 " using (fT($1)):3 title "MIN %s" with lines'
+                            '"< readptf.exe %s %s%s%s 2 " using (fT($1)):3 title "MIN %s" with lines'
                             % (sptf, sap, sss, sdap, sss)
                         )
                         iOK = 1
@@ -498,7 +498,7 @@ def fFormatVar(lVar, sptf="MELPTF"):
                         pass
                         if bOK:
                             pltstr1 = (
-                                '"< readptf %s %s%s%s 3 " using (fT($1)):3 title "(MIN>0) %s" with lines'
+                                '"< readptf.exe %s %s%s%s 3 " using (fT($1)):3 title "(MIN>0) %s" with lines'
                                 % (sptf, sap, sss, sdap, sss)
                             )
                             iOK = 1
@@ -510,7 +510,7 @@ def fFormatVar(lVar, sptf="MELPTF"):
                             pass
                             if bOK:
                                 pltstr1 = (
-                                    '"< readptf %s %s%s%s 4 " using (fT($1)):2 title "Sum %s" with lines'
+                                    '"< readptf.exe %s %s%s%s 4 " using (fT($1)):2 title "Sum %s" with lines'
                                     % (sptf, sap, sss, sdap, sss)
                                 )
                                 iOK = 1
@@ -667,7 +667,7 @@ def fInitLists():
     # pass
     #
     # following lists were prepared by hand using :
-    # readptf MELPTF list > list.txt
+    # readptf.exe MELPTF list > list.txt
     # awk 'BEGIN {i=0;sv=""} {if (($2-i)>1) printf("\"%s\",\n", sv) ; i=$2;sv=$1}' list.txt > vars.txt
     #
 
