@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-'''
+"""
  python script cvh-liqlev.py 
  written by Petr Vokac, UJV Rez, a.s.
  December 2008, 
@@ -31,9 +31,10 @@ vsc is the volume scale factor
 
 see function pvpyx.fGetCVROffset for details
 
-'''
+"""
 
 import meltoolsmod.cvhliqlev as cvhliqlev
+
 if __name__ == "__main__":
- cvhliqlev.fMain()
-pass    
+    cvhliqlev.fMain()
+pass

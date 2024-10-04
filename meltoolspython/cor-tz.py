@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-'''
+"""
 python script cor-tz.py 
 written by Petr Vokac, ÚJV Řež, a.s
 March 2011
@@ -22,10 +22,10 @@ lSerTit - list of titles for each series
 
 lVars, lRing, lSerTit should have the same length
 
-'''
+"""
 
 import meltoolsmod.cortz as cortz
 
 if __name__ == "__main__":
- cortz.fMain()
+    cortz.fMain()
 pass

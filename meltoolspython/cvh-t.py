@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-'''
+"""
 python script cvh-t.py 
 written by Petr Vokac, UJV Rez, a.s.
 February 2011,
@@ -44,10 +44,10 @@ see function pvpyx.fGetHSROffset for details
 
 note: water level is not implemented, CVH-TVAP used for whole volume
 
-'''
+"""
 
 import meltoolsmod.cvht as cvht
-if __name__ == "__main__":
- cvht.fMain()
-pass
 
+if __name__ == "__main__":
+    cvht.fMain()
+pass

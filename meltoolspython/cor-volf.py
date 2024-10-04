@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-'''
+"""
 
 python script cor-volf.py 
 written by Petr Vokac, UJV Rez, a.s.
@@ -33,9 +33,10 @@ sCompList
 25.8.2017: pvmisc and pvpyx modules moved to meltoolsmod
            the main code moved to module corvolf.py
 
-'''
+"""
 
 import meltoolsmod.corvolf as corvolf
+
 if __name__ == "__main__":
- corvolf.fMain()
-pass    
+    corvolf.fMain()
+pass
