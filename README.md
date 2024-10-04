@@ -8,8 +8,8 @@ open tools for MELCOR on Linux
     - `lmelcor*.sh` -- prints all running MELCOR processes (either `melcor` or `melcor2`)
     - `lmelstp.sh` -- ???
     - `lmeltail.sh` -- ???
-- `melendf`
-- `meltoolspython`
+- `melendf` -- ???
+- `meltoolspython` -- ???
 - `readptf`
     - `readptf` -- executable to read MELCOR PTF files
     - `tranptf` -- ???
