@@ -15,8 +15,8 @@ OBJR = globals2.o readptfmod.o readptf.o
 
 OBJT = globals2.o tranptfvar.o tranptfaux.o readptfmod.o tranptfmod.o tranptf.o
 
-readptf = readptf2
-tranptf = tranptf2
+readptf = readptf2.exe
+tranptf = tranptf2.exe
 
 all: $(readptf) $(tranptf)
 
