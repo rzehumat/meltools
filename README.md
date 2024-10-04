@@ -14,3 +14,11 @@ open tools for MELCOR on Linux
 - `readptf`
     - `readptf` -- executable to read MELCOR PTF files
     - `tranptf` -- ???
+
+## Installation of readptf
+1. clone this repository
+2. `cd readptf`
+3. `make`
+4. One of the following
+    - `sudo make install` -- copies executables to `/usr/local/bin`
+    - `export PATH=$PATH:$(pwd)` -- adds `readptf` directory to `PATH`
