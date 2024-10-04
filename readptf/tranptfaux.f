@@ -10,7 +10,7 @@ c get configuration file name from the command line
       i=IARGC()
       sinput=""
       IF (i.LT.1) then
-       call sinfo("tranptf.exe")
+       call sinfo("tranptf")
        call helpout
        iRet=0
       else

@@ -122,7 +122,7 @@ C     function code
       iRet = -1
       goto 11
  10   CONTINUE
-      call sinfo("readptf.exe")
+      call sinfo("readptf")
       call helpout
       iRet = 0
  11   continue
@@ -208,7 +208,7 @@ C           WRITE (*,*) IDD(j),iK
       end function fGetSVOUTide
 
       subroutine sinfo(sexe)
-      character*11 sexe
+      character*7 sexe
 c
       WRITE (*,*) '--------------------------------------------'
       WRITE (*,'("This is ",A)') sexe 
