@@ -1,56 +1,56 @@
-      PROGRAME READPTF
-C
-C     Reads MELCOR 1.8.6 binary plot file
-C     and writes requested data to stdout
-C
-C     written by Petr Vokac, UJV Rez, a.s.
-C     10.7.2008,
-C     using pieces of source code from MELCOR 1.8.6.      
-C
-C-----------------------------------------------
-C
-C     revision 27.12.2011
-C     split main.f into functions and subroutines
-C    
-c     tested with g95, gfortran, ifort
-C-----------------------------------------------
-C
-C     revision 28.12.2011
-C     backup old sources to readptf.111228
-C     created iddo()
-C-----------------------------------------------
-C
-C     revision 26.9.2015
-C     backup old sources to readptf-140825
-C     support for names of CVH volume names
-C     removed global variables subroutine arguments
-C-----------------------------------------------
-C
-C     revision february 2017
-C     read  NKEYT and NRECT in one READ statement:    
-C     READ(NOUP,ERR=33,END=33) NKEYT,NRECT
-C      
-C     corresponding changes to write statement for tranptf         
-C
-C     Note: plotfiles transformed using previous versions of tranptf
-C           are still readable by new readptf version.
-C           See also comments in subroutine sReadList.
-C      
+      PROGRAM READPTF
+!
+!     Reads MELCOR 1.8.6 binary plot file
+!     and writes requested data to stdout
+!
+!     written by Petr Vokac, UJV Rez, a.s.
+!     10.7.2008,
+!     using pieces of source code from MELCOR 1.8.6.      
+!
+!-----------------------------------------------
+!
+!     revision 27.12.2011
+!     split main.f into functions and subroutines
+!    
+!     tested with g95, gfortran, ifort
+!-----------------------------------------------
+!
+!     revision 28.12.2011
+!     backup old sources to readptf.111228
+!     created iddo()
+!-----------------------------------------------
+!
+!     revision 26.9.2015
+!     backup old sources to readptf-140825
+!     support for names of CVH volume names
+!     removed global variables subroutine arguments
+!-----------------------------------------------
+!
+!     revision february 2017
+!     read  NKEYT and NRECT in one READ statement:    
+!     READ(NOUP,ERR=33,END=33) NKEYT,NRECT
+!      
+!     corresponding changes to write statement for tranptf         
+!
+!     Note: plotfiles transformed using previous versions of tranptf
+!           are still readable by new readptf version.
+!           See also comments in subroutine sReadList.
+!      
       use globals
       use readptfmod
       IMPLICIT NONE
       CHARACTER*4 aux1,aux2
       CHARACTER*24 aux24
       INTEGER iaux1, iaux2
-c     initialize variables
+!     initialize variables
       call initglobals()
-c     read command line arguments
+!     read command line arguments
       if (fGetArgs().eq.0) GOTO 900
-c      open melptf      
+!      open melptf      
       OPEN(IUNIT,FILE=FNAME,STATUS=FSTAT,FORM=FFORM,ERR=901,
      +       IOSTAT=IOS,ACTION='READ')
       NOUP=IUNIT
-c      main cycle - label 24
+!      main cycle - label 24
  24   CONTINUE
       READ(NOUP,ERR=33,END=38) BTYPE
       IF(BTYPE.EQ.'.TR/') THEN
@@ -69,7 +69,7 @@ c      main cycle - label 24
         call sOutIndex(SVOUT,RETITL,NKEYT,SVAR,ID,IDD,SUNIT)
         GO TO 38
        ENDIF
-c       sp section is only at the beginning of the melptf ?
+!       sp section is only at the beginning of the melptf ?
        if (SVOUT.EQ.'sp') GO TO 38
        READ(NOUP,ERR=33,END=33) STIME,SDT,SCPU,NCYCLE,(D(I),I=1,NRECT)
        iTR=iTR+1
@@ -102,7 +102,7 @@ c       sp section is only at the beginning of the melptf ?
        if (SVOUT.EQ.'check') write(*,*) 'BTYPE.NE.PTYPE',BTYPE  
        GO TO 24
       endif
-c      BTYPE.EQ.PTYPE read BTYPE again      
+!      BTYPE.EQ.PTYPE read BTYPE again      
       READ(NOUP,ERR=33,END=33) BTYPE
       IF (BTYPE.EQ.'KEY ') THEN
        call sReadList(NOUP,NKEYT,NRECT,SVAR,ID,SUNIT,IDD)
@@ -118,7 +118,7 @@ c      BTYPE.EQ.PTYPE read BTYPE again
        endif
       ENDIF
       GO TO 24
-c      end of the main cycle - label 24
+!      end of the main cycle - label 24
  33   CONTINUE
       WRITE(*,*) "File:", FNAME
       WRITE(*,*) "Error reading the file or" 
@@ -132,5 +132,5 @@ c      end of the main cycle - label 24
  900  CONTINUE
       IF (SVOUT.EQ.'check') call scheck2(iTitl,iKey,iTR,iSP)
       if (SVOUT.EQ.'names') call fPrintSPNames()
-      END PROGRAME READPTF
+      END PROGRAM READPTF
 
