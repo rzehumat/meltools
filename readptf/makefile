@@ -15,6 +15,8 @@ OBJR = globals.o readptfmod.o readptf.o
 
 OBJT = globals.o tranptfvar.o tranptfaux.o readptfmod.o tranptfmod.o tranptf.o
 
+USR_BIN = /usr/local/bin
+
 readptf = readptf.exe
 tranptf = tranptf.exe
 
@@ -28,6 +30,10 @@ $(tranptf): $(OBJT)
 
 %.o: %.f90
 	$(FCOMPL) $(FFLAGC) -c $< -o $@
+
+install: all
+	install -v $(readptf) $(USR_BIN)
+	install -v $(tranptf) $(USR_BIN)
 
 clean:
 	rm -f *.o *.mod *~ $(readptf) $(tranptf)
