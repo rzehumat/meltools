@@ -19,10 +19,7 @@
       idash = INDEX(SSP,'CVH-VOLUME-NAME')
       ibrl = INDEX(SSP,'((')
       ibrr = INDEX(SSP,'))')
-      if ((ilen.gt.0).and.
-     +     (idash.gt.0).and.
-     +     (ibrl.gt.0).and.
-     +     (ibrr.gt.0)) then
+      if ((ilen.gt.0).and.(idash.gt.0).and.(ibrl.gt.0).and.(ibrr.gt.0)) then
        SOUT=SSP(ibrr+2:ilen)
        read(SSP(ibrl+2:ibrr-1),*) iii
 !         WRITE(*,*) ilen,idash,ibrl,ibrr      
@@ -37,10 +34,7 @@
        return
       endif
       idash = INDEX(SSP,'FL-PATH-NAME')      
-      if ((ilen.gt.0).and.
-     +     (idash.gt.0).and.
-     +     (ibrl.gt.0).and.
-     +     (ibrr.gt.0)) then
+      if ((ilen.gt.0).and.(idash.gt.0).and.(ibrl.gt.0).and.(ibrr.gt.0)) then
        SOUT=SSP(ibrr+2:ilen)
        read(SSP(ibrl+2:ibrr-1),*) iii
 !         WRITE(*,*) ilen,idash,ibrl,ibrr      
@@ -60,14 +54,12 @@
       write(*,*) "CVH volume names"
       do i=1,nCvhVolumeName
        il = LEN_TRIM(sCvhVolumeName(i))
-       if (il.gt.0 .and. .not. sCvhVolumeName(i)=="") write(*,*) i,
-     +  sCvhVolumeName(i),il
+       if (il.gt.0 .and. .not. sCvhVolumeName(i)=="") write(*,*) i, sCvhVolumeName(i),il
       enddo
       write(*,*) "FL path names"      
       do i=1,nFlPathName
        il = LEN_TRIM(sFlPathName(i))
-       if (il.gt.0 .and. .not. sFlPathName(i)=="") write(*,*) i,
-     +  sFlPathName(i),il
+       if (il.gt.0 .and. .not. sFlPathName(i)=="") write(*,*) i, sFlPathName(i),il
       enddo
       end subroutine fPrintSPNames
 !
@@ -301,10 +293,8 @@
       REAL(KIND=KIND_PLOT) :: STIME
       integer NCYCLE,NRECT,NKEYT
       write(*,*) "KEY reset after time ",STIME,"cycle",NCYCLE
-      write(*,*) "    NRECT = ", NRECT, 
-     +" (total number of real values in the time record)"
-      write(*,*) "    NKEYT = ", NKEYT, 
-     +" (total number of variables)"
+      write(*,*) "    NRECT = ", NRECT, " (total number of real values in the time record)"
+      write(*,*) "    NKEYT = ", NKEYT, " (total number of variables)"
       return
       end subroutine scheck1
 
@@ -313,8 +303,7 @@
       write(*,*) "*********************************"
       write(*,*) "TITL was found ", iTitl, " times"
       write(*,*) "KEY was found ", iKey, " times"
-      write(*,*) "TR was found ", iTR, 
-     +" times (= number of time records)"
+      write(*,*) "TR was found ", iTR, " times (= number of time records)"
       write(*,*) "SP was found ", iSP, " times"
       write(*,*) "*********************************"       
       return
