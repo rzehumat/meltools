@@ -9,6 +9,7 @@ open tools for MELCOR on Linux
     - `lmelstp.sh` -- ???
     - `lmeltail.sh` -- ???
 - `melendf` -- ???
+    - uncompress the endf files from `data-endf.tar.xz` (they are compressed to avoid large amount of large text files in git)
 - `meltoolspython` -- ???
 - `readptf`
     - `readptf` -- executable to read MELCOR PTF files
