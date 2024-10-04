@@ -15,8 +15,8 @@ OBJR = globals2.o readptfmod.o readptf.o
 
 OBJT = globals2.o tranptfvar.o tranptfaux.o readptfmod.o tranptfmod.o tranptf.o
 
-readptf = ~/bin/readptf2.exe
-tranptf = ~/bin/tranptf2.exe
+readptf = readptf2
+tranptf = tranptf2
 
 all: $(readptf) $(tranptf)
 
@@ -26,7 +26,7 @@ $(readptf): $(OBJR)
 $(tranptf): $(OBJT) 
 	$(FCOMPL) -o $(tranptf) $(OBJT) 
 
-.f.o:
+.f90.o:
 	$(FCOMPL) $(FFLAGC) -c $(<D)/$(<F) -o $(@D)/$(@F) 
 
 clean:

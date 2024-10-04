@@ -26,7 +26,7 @@ $(readptf): $(OBJR)
 $(tranptf): $(OBJT) 
 	$(FCOMPL) -o $(tranptf) $(OBJT) 
 
-.f.o:
+.f90.o:
 	$(FCOMPL) $(FFLAGC) -c $(<D)/$(<F) -o $(@D)/$(@F) 
 
 clean:
