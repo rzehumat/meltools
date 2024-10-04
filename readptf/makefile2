@@ -29,5 +29,9 @@ $(tranptf): $(OBJT)
 %.o: %.f90
 	$(FCOMPL) $(FFLAGC) -c $< -o $@
 
+install: all
+	install -v $(readptf) $(USR_BIN)
+	install -v $(tranptf) $(USR_BIN)
+
 clean:
 	rm -f *.o *.mod *~ $(readptf) $(tranptf)
