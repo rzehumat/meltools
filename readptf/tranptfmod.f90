@@ -20,8 +20,7 @@
       
       subroutine inputread(sinput)
 ! reads input parameters from the configuration file 
-      namelist /input/ stitle,smelptfi,svarlist,smelptfo,inrpd,
-     + sstarttime,sendtime,ievery,sdtmin
+      namelist /input/ stitle,smelptfi,svarlist,smelptfo,inrpd,sstarttime,sendtime,ievery,sdtmin
       integer i,IUNIT
       character*250 sinput
       stitle=""
@@ -50,10 +49,8 @@
       do i=1,mptf
        if (len_trim(smelptfi(i)).gt.0) then
         j=len_trim(smelptfi(i))
-        write(*,"('Input file ',I2,' : ',A,' start: ',A,
-     +         ' end: ', A,' every: ', I2,' dtmin: ',A)") 
-     +        i, trim(smelptfi(i)),trim(sstarttime(i)),
-     +        trim(sendtime(i)),ievery(i),trim(sdtmin(i))
+        write(*,"('Input file ',I2,' : ',A,' start: ',A, ' end: ', A,' every: ', I2,' dtmin: ',A)") i, &
+            trim(smelptfi(i)),trim(sstarttime(i)), trim(sendtime(i)),ievery(i),trim(sdtmin(i))
        endif
       enddo
       write(*,"('Output file : ',A)") smelptfo
@@ -80,8 +77,7 @@
       iev=0
       FNAME=smelptfi(iinp)
       write(*,FMT='("Processing file: ", A, " : ")') trim(FNAME)
-      OPEN(IUNIT,FILE=FNAME,STATUS=FSTAT,FORM=FFORM,ERR=901,
-     +       IOSTAT=IOS,ACTION='READ')
+      OPEN(IUNIT,FILE=FNAME,STATUS=FSTAT,FORM=FFORM,ERR=901,IOSTAT=IOS,ACTION='READ')
       NOUP=IUNIT
 !      main cycle - label 24
  24   CONTINUE
@@ -206,9 +202,7 @@
 ! do the transformation for all the input files
       integer i,iuout
       iuout=0
-      OPEN(iuout,FILE=smelptfo,STATUS='NEW',
-     +       FORM='UNFORMATTED',ERR=901,
-     +       ACTION='WRITE')
+      OPEN(iuout,FILE=smelptfo,STATUS='NEW',FORM='UNFORMATTED',ERR=901,ACTION='WRITE')
 
       do i=1,mptf
        if (len_trim(smelptfi(i)).gt.0) then
