@@ -1,0 +1,5 @@
+# fortran compiled files
+*.mod
+*.o
+readptf/readptf
+readptf/tranptf
