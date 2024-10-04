@@ -26,9 +26,8 @@ $(readptf): $(OBJR)
 $(tranptf): $(OBJT) 
 	$(FCOMPL) -o $(tranptf) $(OBJT) 
 
-.f90.o:
+%.o: %.f90
 	$(FCOMPL) $(FFLAGC) -c $< -o $@
 
 clean:
 	rm -f *.o *.mod *~ $(readptf) $(tranptf)
-
